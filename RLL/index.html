@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Representation Learning Lab</title>
+    <meta name="description" content="Representation Learning Lab">
+    <meta property="og:title" content="Representation Learning Lab"/>   
+
+    <script src="assets/jquery.min.js"></script>
+
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="assets/imgs/RLL.svg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- font icons -->
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="assets/vendors/owl-carousel/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel/css/owl.theme.default.css">
+
+    <!-- Bootstrap + Ollie main styles -->
+	<link rel="stylesheet" href="assets/css/ollie.css">
+
+
+    <style>
+        #cf2 {
+        position:relative;
+        height:500px;
+        width:800px;
+        margin:0 auto;
+        }
+        #cf2 img {
+        position:absolute;
+        left:0;
+        -webkit-transition: opacity 0.5s ease-in-out;
+        -moz-transition: opacity 0.5s ease-in-out;
+        -o-transition: opacity 0.5s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
+        }
+
+        #cf2 img.transparent {
+        opacity:0;
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: alpha(opacity=0);
+        }
+        #cf_onclick {
+        cursor:pointer;
+        }
+    .sidenav {
+        width: 50%;
+        height: 100%;
+        
+
+        float: left;
+    }
+    .bgrnd {
+        width: 40%;
+        height: 100%;
+        
+
+        float: right;
+    }
+
+ 
+
+    </style>
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+
+    <nav id="scrollspy" class="navbar navbar-light bg-light navbar-expand-lg fixed-top" data-spy="affix" data-offset-top="20">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="assets/imgs/RLL.svg" alt="" class="brand-img"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+						<a class="nav-link" href="#testmonial">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#research">Research</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">Publication</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <!-- <li class="nav-item ml-0 ml-lg-4">
+                        <a class="nav-link btn btn-primary" href="components.html">Components</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <header id="home" class="header">
+        <div class="overlay"></div>
+
+        <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">  
+            <div class="container">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 class="carousel-title">Representation Learning Lab</h1>
+                            <a class="nav-link" href="#about"><button class="btn btn-primary btn-rounded">Learn More</button></a>
+					    </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 class="carousel-title">Representation Learning Lab</h1>
+                            <a class="nav-link" href="#about"><button class="btn btn-primary btn-rounded">Learn More</button></a>
+                          </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 class="carousel-title">Representation Learning Lab</h1>
+                            <a class="nav-link" href="#about"><button class="btn btn-primary btn-rounded">Learn More</button></a>
+                          </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+
+        <div class="infos container mb-4 mb-md-2">
+            <div class="title">
+                <h6 class="subtitle font-weight-normal">Part of</h6>
+                <h5>Computer Engineering Department</h5>
+                <p class="font-small">University of Kurdistan, Iran</p>
+            </div>
+            <!-- <div class="socials text-right"> -->
+                <!-- <div class="row justify-content-between"> -->
+                    <!-- <div class="col"> -->
+                        <!-- <a class="d-block subtitle"><i class="ti-microphone pr-2"></i> (+98) 936-672-1167</a> -->
+                        <!-- <a class="d-block subtitle"><i class="ti-email pr-2"></i> amjadseyedi@uok.ac.ir</a> -->
+                    <!-- </div> -->
+                    <!-- <div class="col"> -->
+                        <!-- <h6 class="subtitle font-weight-normal mb-2">Social Media</h6> -->
+                        <!-- <div class="social-links"> -->
+                            <!-- <a href="javascript:void(0)" class="link pr-1"><i class="ti-facebook"></i></a> -->
+                            <!-- <a href="javascript:void(0)" class="link pr-1"><i class="ti-twitter-alt"></i></a> -->
+                            <!-- <a href="javascript:void(0)" class="link pr-1"><i class="ti-google"></i></a> -->
+                            <!-- <a href="javascript:void(0)" class="link pr-1"><i class="ti-pinterest-alt"></i></a> -->
+                            <!-- <a href="javascript:void(0)" class="link pr-1"><i class="ti-instagram"></i></a> -->
+                            <!-- <a href="javascript:void(0)" class="link pr-1"><i class="ti-rss"></i></a> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+        </div>
+    </header>
+
+    <section class="section" id="about">
+
+        <div class="container">
+
+            <div class="row align-items-center mr-auto">
+                <div class="">
+                    <h6 class="xs-font mb-0"></h6>
+                    <h3 class="section-title">About Us</h3>
+                    
+
+<div class="container xs-d-flex xs-flex-wrap">
+   <div class="sidenav">
+      <p align="justify">The AML team is part of the Representation Learning Lab, affiliated with the Department of Computer Engineering at the University of Kurdistan, Iran. </p>
+
+<p align="justify">Algebraic Machine Learning is a machine learning approach using the mathematics of Model Theory to naturally embed what we know about data and formal knowledge into a discrete algebraic structure.</p>
+
+<p align="justify">Our algorithms build upon linear algebraic, geometric, probabilistic, and deep learning operations. Additionally, we attempt to develop theoretical foundations of the effect and principles underlying our algorithmic approaches.</p>
+
+</div>
+   <div class="bgrnd">
+      <img src="assets\imgs\lab.jpg" style="width: 90%;  height: auto;">
+   </div>
+
+
+
+  
+
+
+                    <!-- <a href="javascript:void(0)">Read more...</a> -->
+                
+                <!-- <div class="col-sm-6 col-md-4 ml-auto">
+                    <div class="widget">
+                        <div class="icon-wrapper">
+                            <i class="ti-calendar"></i>
+                        </div>
+                        <div class="infos-wrapper">
+                            <h4 class="text-primary">15+</h4>
+                            <p>onsectetur perspiciatis</p>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <div class="icon-wrapper">
+                            <i class="ti-face-smile"></i>
+                        </div>
+                        <div class="infos-wrapper">
+                            <h4 class="text-primary">125+</h4>
+                            <p>onsectetur perspiciatis</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="widget">
+                        <div class="icon-wrapper">
+                            <i class="ti-star"></i>
+                        </div>
+                        <div class="infos-wrapper">
+                            <h4 class="text-primary">3434+</h4>
+                            <p>onsectetur perspiciatis</p>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <div class="icon-wrapper">
+                            <i class="ti-user"></i>
+                        </div>
+                        <div class="infos-wrapper">
+                            <h4 class="text-primary">80+</h4>
+                            <p>onsectetur perspiciatis</p>
+                        </div>
+                    </div> -->
+                </div>
+             </div>
+             
+             <p align="justify"><br>Our current algebraic machine learning projects are mainly focused on the following directions:</p>
+
+ <ul>
+  <li><p>To learn data representations to facilitate data understanding based on visual observation.</p></li>
+  <li>    <p>To understand and mitigate the trade-off between model robustness and accuracy by both theoretical and empirical studies.</p></li>
+  <li>    <p>To seek effective solutions addressing the deficiency of large-scale, noisy data with high redundancy, missing and small data situations, and inadequate labeling cases.</p>
+</li>
+  <li>       <p>To leverage multimodal data collected from different information resources and characterized by different feature views.</p>
+
+</li>
+</ul> 
+        </div>
+    </section>
+
+
+    
+
+
+    <section class="section" id="testmonial">
+        <div class="container">
+            <h6 class="xs-font mb-0"></h6>
+			<h5 class="">Professors</h5></br>
+            
+            <div id="owl-testmonial">
+                <div class="list-item">
+				
+
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/akhlaghian.jpg" class="avatar" >
+                        <div class="des">
+						<center>
+                            <a href="https://scholar.google.com/citations?hl=en&user=BQl2nKsAAAAJ" target="_blank"><h5 class="name">Fardin Akhlaghian</h5></a>
+						</center>
+                            <p>Fardin is an associate professor of Computer engineering at the University of Kurdistan. His research focuses on machine learning, computer vision, and data mining. He did his PhD in Computer Vision at the University of Wollongong in 2005. He held a master's degree in Telecommunications and Signal Processing from the University of Tarbiat Modarres in 1992.</p>
+
+                            <div class="line"></div>
+                            <h6 class="name">Associate Professor</h6>
+                            <h6 class="xs-font"></h6>
+                        </div>
+                    </div>
+                
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/abdollahpouri.jpg" class="avatar" >
+                        <div class="des">
+						<center>
+                            <a href="https://scholar.google.com/citations?user=1H1gDHQAAAAJ" target="_blank"><h5 class="name">Alireza Abdollahpouri</h5></a>
+						</center>
+                            <p>A. Abdollahpouri is an associate professor of computer networks at the Department of Computer and IT Engineering, University of Kurdistan, Sanandaj, Iran.  His research interests are in various fields of computer networks and computer architecture such as Complex Networks and Recommender Systems.</p>
+
+                            <div class="line"></div>
+                            <h6 class="name">Associate Professor</h6>
+                            <h6 class="xs-font"></h6>
+                        </div>
+                    </div>
+
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/daneshfar.jpg" class="avatar" >
+                        <div class="des">
+						<center>
+                            <a href="https://scholar.google.com/citations?hl=en&user=js7wMN4AAAAJ" target="_blank"><h5 class="name">Fatemeh Daneshfar</h5></a>
+						</center>
+                            <p>Fatemeh Daneshfar is an assistant professor at the Department of Computer and IT Engineering. She is interested in natural language processing and machine learning techniques and research with a focus on user-friendly spoken dialog systems, emotion recognition, and automatic speech recognition.</p>
+
+                            <div class="line"></div>
+                            <h6 class="name">Assistant Professor</h6>
+                            <h6 class="xs-font"></h6>
+                        </div>
+                    </div>
+
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/pirmohammadiani.jpg" class="avatar" >
+                        <div class="des">
+						<center>
+                            <a href="https://scholar.google.com/citations?user=4O87_3oAAAAJ" target="_blank"><h5 class="name">Rojiar Pir Mohammadiani</h5></a>
+						</center>
+                            <p>Experienced Assistant Professor with a demonstrated history of working in the research industry. Skilled in building models for discovering actionable knowledge that help businesses and organizations especially based on machine learning, deep learning and social network analysis. </p>
+
+                            <div class="line"></div>
+                            <h6 class="name">Assistant Professor</h6>
+                            <h6 class="xs-font"></h6>
+                        </div>
+                    </div>
+					
+					
+								
+                </div>
+				<div class="item">
+				</div>
+				
+            </div>
+        </div>
+		<hr>
+		<div class="container xs-no-padding">
+            <h6 class="xs-font mb-0"></h6>
+            <h6 class="">Research Assistants</h6></br>
+			
+            <div id="owl-testmonial">
+                <div class="list-item">
+				
+
+                    
+					
+					
+					
+					<div class="textmonial-item">
+                        <img src="assets/imgs/amjad.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Amjad Seyedi</h5>
+							<h6 class="text-primary">Sep 2019 - present</h6>
+							<p>Algebraic Machine Learning</p>
+
+                        </center>    
+                        </div>
+                    </div>
+					
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/ako.jpg" class="avatar" alt="">
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Ako Bartani</h5>
+							
+							<h6 class="text-primary">Sep 2021 - present</h6>
+                            <p>Deep Neural Networks</p>
+							
+
+                        </center>   
+                        </div>
+                    </div>
+
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/sana1.jpg" class="avatar" alt="">
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Sana Rahmani</h5>
+							
+							<h6 class="text-primary">Sep 2022 - present</h6>
+                            <p>Multi-Modal Learning, Sentiment Analysis</p>
+							
+
+                        </center>   
+                        </div>
+                    </div>
+					
+					<div class="textmonial-item">
+                        
+                    </div>
+               
+
+				
+            </div>
+        </div>
+		
+		
+		
+		<hr>
+
+        <h6 class="xs-font mb-0"></h6>
+            <h6 class="">PhD Students</h6></br>
+			
+            <div id="owl-testmonial">
+                <div class="list-item">
+				
+
+                    
+					
+					
+					
+					<div class="textmonial-item">
+                        <img src="assets/imgs/wafa.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Wafa Barkhoda</h5>
+							<h6 class="text-primary">Sep 2022 - present</h6>
+							<p>Distributionally Robust Learning<br><br>
+                            Wafa is a faculty member of the Computer Engineering Department, at the Kermanshah University of Technology.</p>
+
+                        </center>    
+                        </div>
+                    </div>
+					
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/reza.jpg" class="avatar" alt="">
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Reza Mahmoodi</h5>
+							
+							<h6 class="text-primary">Sep 2022 - present</h6>
+                            <p>Deep Multi-label Learning</p>
+							<h6 class="text-primary">Feb 2022 - Sep 2022</h6>
+							<p>Master's thesis: Unsupervised Link Prediction by Adversarial Training</p>
+
+                        </center>   
+                        </div>
+                    </div>
+
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/havas.jpg" class="avatar" alt="">
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Shahla Havas</h5>
+							
+							<h6 class="text-primary">Sep 2022 - present</h6>
+                            <p>Fair Recommender Systems</p>
+							
+
+                        </center>   
+                        </div>
+                    </div>
+					
+					<div class="textmonial-item">
+                        
+                    </div>
+               
+
+				
+            </div>
+        </div>
+		
+		
+		
+		<hr>
+
+		<div class="container">
+            <h6 class="xs-font mb-0"></h6>
+            
+			<h6 class="text">Master's Students</h6></br>
+			
+            <div id="owl-testmonial">
+                <div class="list-item">
+				
+
+					
+					
+					
+					<div class="textmonial-item">
+                        <img src="assets/imgs/setareh.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Setareh Mohammadi</h5>
+							<h6 class="text-primary">2021-present</h6>
+                            <p>Robust Data Representation</p>
+						    </center>
+                            
+                        </div>
+                    </div>
+					
+					<div class="textmonial-item">
+                        <img src="assets/imgs/mohammad.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Mohammad Faraji</h5>
+							<h6 class="text-primary">2021-present</h6>
+                            <p>Multi-label feature selection</p>
+						    </center>
+   
+                        </div>
+                    </div>
+
+                    <!--<div class="textmonial-item">
+                        <img src="assets/imgs/ali.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Ali Mirgoli</h5>
+							<h6 class="text-primary">2022-present</h6>
+                            <p>Robust Recommendation Systems</p>
+						    </center>
+                        </div>
+                    </div>-->
+					
+					<div class="textmonial-item">
+                        <img src="assets/imgs/arina.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Arina Mohammadi</h5>
+							<h6 class="text-primary">2022-present</h6>
+                            <p>Attributed Graph Clustering</p>
+						    </center>
+                        </div>
+                    </div>
+					
+					
+					
+					<div class="textmonial-item">
+                        <img src="assets/imgs/soran.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">M. Soran Karimi</h5>
+							<h6 class="text-primary">2022-present</h6>
+                             <p>Multi-view Clustering</p>
+                            </center>
+                        </div>
+                    </div>
+					
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/seyvan.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Seyvan SoleymanBeigi</h5>
+							<h6 class="text-primary">2023-present</h6>
+                             <p>Topic Modeling</p>
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/sarina.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Sarina Khaledian</h5>
+							<h6 class="text-primary">2023-present</h6>
+                             <p>Multi-Objective Recommendation Systems</p>
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/shirin.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Shirin Moradi</h5>
+							<h6 class="text-primary">2023-present</h6>
+                             <p>Anomaly Detection</p>
+                            </center>
+                        </div>
+                    </div>
+					
+				
+                </div>
+				
+				
+            </div>
+        </div>
+		
+		<hr>
+		<div class="container">
+            <h6 class="xs-font mb-0"></h6>
+            
+			<h6 class="text">Alumni</h6></br>
+            <div id="owl-testmonial">
+                <div class="list-item">
+				
+
+					<div class="textmonial-item">
+                        <img src="assets/imgs/navid.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+							<a href="https://scholar.google.com/citations?user=a_Q67kIAAAAJ&hl=en" target="_blank"><h5 class="name">Navid Salahian</h5></a>
+							<h6 class="text-primary">2020-2022</h6>
+                            <p>Deep Autoencoder Factorization for Data Representation</p>
+							</center>
+                            
+                        </div>
+                    </div>
+					
+					<div class="textmonial-item">
+                        <img src="assets/imgs/jovan.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <a href="https://scholar.google.com/citations?user=ANttTRIAAAAJ&hl=en" target="_blank"><h5 class="name">Jovan Chavoshinejad</h5></a>
+							<h6 class="text-primary">2020-2022</h6>
+                            <p>Self-supervised Semi-supervised Matrix factorization</p>
+							
+                            
+                            </center>
+                        </div>
+                    </div>
+					
+					<div class="textmonial-item">
+                        <img src="assets/imgs/maryam.jpg" class="avatar" >
+                        <div style="width: 100%;">
+						    <center>
+                            <h5 class="name">Maryam Mozafari</h5>
+							<h6 class="text-primary">2020-2022</h6>
+                            <p>Unsupervised Feature Selection </p>
+                            </center>
+                        </div>
+                    </div>
+
+                    <div class="textmonial-item">
+                        <img src="assets/imgs/akram.jpg" class="avatar" >
+                        <div style="width: 100%;">
+							<center>
+                            <h5 class="name">Akram Hajiveiseh</h5>
+							<h6 class="text-primary">2020-2023</h6>
+                            <p>Directed Graph Clustering</p>
+							</center>
+                        </div>
+                    </div>
+				
+                </div>
+				<div class="item">
+				</div>
+				
+            </div>
+        </div>
+		
+    
+
+    
+
+
+
+</section>
+
+
+
+
+
+<section class="section" id="research">
+        <div class="container">
+            <h6 class="xs-font mb-0"></h6>
+            <h3 class="section-title mb-4">Research</h3>
+
+            <div class="row text-center">
+                <div class="col-lg-4">
+                    <a href="javascript:void(0)" class="card border-0 text-dark">
+                        <img class="box-shadow" src="assets/imgs/dr.jpg" alt="">
+                        <span class="card-body">
+                            <h4 class="title mt-4">Data Representation</h4>
+                            <p class="xs-font">Semi-/Self-/Unsupervised Learning, Robust Representation, Feature Selection, Multi-view Learning</p>
+                        </span>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="javascript:void(0)" class="card border-0 text-dark">
+                        <img class="box-shadow" src="assets/imgs/lr.jpg" alt="">
+                        <span class="card-body">
+                            <h4 class="title mt-4">Low-rank Approximation</h4>
+                            <p class="xs-font">Matrix Completion, Image Reconstruction, Collaborative Filtering, Recommendation Systems</p>
+                        </span>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="javascript:void(0)" class="card border-0 text-dark">
+                        <img class="box-shadow" src="assets/imgs/cn.jpg" alt="">
+                        <span class="card-body">
+                            <h4 class="title mt-4">Complex Network Analysis</h4>
+                            <p class="xs-font">Network Embedding, Link Prediction, [Attributed] Graph Clustering, and Community Detection</p>
+                        </span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </section> 
+
+<!--<section class="section" id="portfolio">
+
+        <div class="container">
+            <h6 class="xs-font mb-0"></h6>
+            <h3 class="section-title pb-4">Projects</h3>
+        </div>
+        <div class="mt-4 d-flex flex-wrap mb-5">
+            <a href="#" class="item expertises-item col-lg-3 col-md-3 col-sm-6 col-12">
+                <img src="assets/imgs/img-1.jpg"alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, ollie Landing page" class="box-shadow img-fluid">
+                <h6 class="mt-3 mb-2">Fuga asperiores</h6>
+                <p class="xs-font">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </a> 
+            <a href="#" class="item expertises-item col-lg-3 col-md-3 col-sm-6 col-12">
+                <img src="assets/imgs/img-2.jpg"alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, ollie Landing page" class="box-shadow img-fluid">
+                <h6 class="mt-3 mb-2">Voluptatibus iure!</h6>
+                <p class="xs-font">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </a> 
+            <a href="#" class="item expertises-item col-lg-3 col-md-3 col-sm-6 col-12">
+                <img src="assets/imgs/img-3.jpg"alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, ollie Landing page" class="box-shadow img-fluid">
+                <h6 class="mt-3 mb-2">Autem minus animi</h6>
+                <p class="xs-font">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </a> 
+            <a href="#" class="item expertises-item col-lg-3 col-md-3 col-sm-6 col-12">
+                <img src="assets/imgs/img-4.jpg"alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, ollie Landing page" class="box-shadow img-fluid">
+                <h6 class="mt-3 mb-2">Sed eligendi</h6>
+                <p class="xs-font">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </a> 
+        </div>  
+</section>-->
+
+    
+
+
+    <section class="section bg-overlay" id="portfolio">
+        <div class="container">
+            <div class="infos mb-4 mb-md-2">
+                <div class="title">
+                    <h6 class="subtitle font-weight-normal">We are looking for</h6>
+                    <h5>Postdoc and research assistant with expertise in machine learning</h5>
+                </div>
+            <div class="socials">
+                <div class="row justify-content-between">
+                    <div class="col">
+                        <a class="d-block subtitle"><i class="ti-microphone"></i> (+98) 936-672-1167</a>
+                        <a class="d-block subtitle"><i class="ti-email"></i> amjadseyedi@uok.ir</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+</section>
+
+
+
+    
+
+    <section class="section" id="blog">
+
+        <div class="container mb-3">
+            <h6 class="xs-font mb-0"></h6>
+            <h3 class="section-title mb-5">Publication</h3>
+
+			<div class="blog-wrapper">
+                <div class="img-wrapper">
+                    <img src="assets/imgs/LPANMF.svg" alt="" style="background-color: white;">
+                    
+                </div>
+                <div class="txt-wrapper">
+                    <h4 class="blog-title">Link Prediction by Adversarial Nonnegative Matrix Factorization</h4>
+                    <p style="text-align: justify">We proposed a novel link prediction method based on adversarial NMF, which reconstructs a sparse network by an efficient adversarial training algorithm. Unlike the conventional NMF methods, our model considers potential test adversaries beyond the pre-defined bounds and provides a robust reconstruction with good generalization power. Besides, to preserve the local structure of a network, we use the common neighbor algorithm to extract the node similarity and apply it to low-dimensional latent representation. </p>
+                    <p class="badge badge-info">Knowledge-based Systems, 2023</p>
+
+                    <h6 class="blog-footer">
+						R. Mahmoodi |
+						S. A . Seyedi |
+                        F. Akhlaghian Tab |
+						A. Abdollahpouri
+                    </h6>
+                </div>
+            </div>
+			<br>
+            <div class="blog-wrapper">
+                <div class="img-wrapper">
+                    <img src="assets/imgs/S4NMF.svg" alt="" style="background-color: white;">
+                    
+                </div>
+                <div class="txt-wrapper">
+                    <h4 class="blog-title"><a href="https://doi.org/10.1016/j.patcog.2022.109282" target="_blank">Self-Supervised Semi-Supervised Nonnegative Matrix Factorization for Data Clustering</a></h4>
+                    <p style="text-align: justify">In this paper, we design an effective Self-Supervised Semi-Supervised Nonnegative Matrix Factorization (S4NMF) in a semi-supervised clustering setting. The S4NMF directly extracts a consensus result from ensembled NMFs with similarity and dissimilarity regularizations. In an iterative process, this self-supervisory information will be fed back to the proposed model to boost semi-supervised learning and form more distinct clusters. </p>
+                    <p class="badge badge-info">Pattern Recognition, 2023</p>
+
+                    <h6 class="blog-footer">
+						J. Chavoshinejad |
+						S. A . Seyedi |
+                        F. Akhlaghian Tab |
+                        N. Salahian 
+                    </h6>
+                </div>
+            </div>
+
+			<br>
+			<div class="blog-wrapper">
+                <div class="img-wrapper">
+                    <img src="assets/imgs/EADNMF.svg" alt="" style="background-color: white;">
+                    
+                </div>
+                <div class="txt-wrapper">
+                    <h4 class="blog-title"><a href="https://doi.org/10.1016/j.ins.2022.11.120" target="_blank">Elastic Adversarial Deep Nonnegative Matrix Factorization for Matrix Completion</h4></a>
+                    <p style="text-align: justify">This paper proposes an elastic adversarial training to design a high-capacity Deep Nonnegative Matrix Factorization (DNMF) model with proper discovery latent structure of the data and enhanced generalization abilities. In other words, we address the challenges mentioned above by perturbing the inputs in DNMF with an elastic loss which is intercalated and adapted between Frobenius and L2,1 norms. This model not only dispenses with adversarial DNMF generation but also is robust towards a mixture of multiple attacks to attain improved accuracy.  </p>
+                    <p class="badge badge-info">Information Sciences, 2023</p>
+
+                    <h6 class="blog-footer">
+						S. A . Seyedi |
+                        F. Akhlaghian Tab |
+						A. Lotfi |
+                        N. Salahian |
+						J. Chavoshinejad
+                    </h6>
+                </div>
+            </div>
+			
+			
+			<br>
+			<div class="blog-wrapper">
+                <div class="img-wrapper">
+                    <img src="assets/imgs/DANMF.svg" alt="" style="background-color: white;">
+                    
+                </div>
+                <div class="txt-wrapper">
+                    <h4 class="blog-title"><a href="https://doi.org/10.1016/j.eswa.2022.119051" target="_blank">Deep Autoencoder-like NMF with Contrastive Regularization and Feature Relationship Preservation</a></h4>
+                    <p style="text-align: justify">This paper proposes the Deep Autoencoder-like NMF with Contrastive Regularization and Feature Relationship preservation (DANMF-CRFR) to address the data representation challenges. Inspired by contrastive learning, this deep model is able to learn discriminative and instructive deep features while adequately enforcing the local and global structures of the data to its decoder and encoder components. Meanwhile, DANMF-CRFR also imposes feature correlations on the basis matrices during feature learning to improve part-based learning capabilities. </p>
+                    <p class="badge badge-info">Expert Systems with Applications, 2023</p>
+
+                    <h6 class="blog-footer">
+						N. Salahian |
+                        F. Akhlaghian Tab |
+                        S. A . Seyedi |
+						J. Chavoshinejad
+                    </h6>
+                </div>
+            </div>
+			
+			
+			<br>
+			<div class="blog-wrapper">
+                <div class="img-wrapper">
+                    <img src="assets/imgs/SPMLD.svg" alt="" style="background-color: white;">
+                    
+                </div>
+                <div class="txt-wrapper">
+                    <a href="http://proceedings.mlr.press/v101/seyedi19a.html" target="_blank"><h4 class="blog-title">Self-Paced Multi-Label Learning with Diversity</h4></a>
+                    <p style="text-align: justify">In this paper, we propose a self-paced multi-label learning with diversity (SPMLD) which aims to cover diverse labels with respect to its learning pace. In addition, the proposed framework is applied to an efficient correlation-based multi-label method. The non-convex objective function is optimized by an extension of the block coordinate descent algorithm. Empirical evaluations on real-world datasets with different dimensions of features and labels imply the effectiveness of the proposed predictive model.  </p>
+                    <p class="badge badge-info">Asian Conference on Machine Learning, 2019</p>
+
+                    <h6 class="blog-footer">
+						S. A . Seyedi |
+						S. S . Ghodsi |
+                        F. Akhlaghian Tab |
+                        M. Jalili |
+						P. Moradi
+                    </h6>
+                </div>
+            </div>
+			
+			
+			<br>
+			<div class="blog-wrapper">
+                <div class="img-wrapper">
+                    <img src="assets/imgs/WSF.svg" alt="" style="background-color: white;">
+                    
+                </div>
+                <div class="txt-wrapper">
+                    <a href="https://doi.org/10.1109/AISP.2017.8324084" target="_blank"><h4 class="blog-title">A weakly-Supervised Factorization Method with Dynamic Graph Embedding</h4></a>
+                    <p style="text-align: justify">In this paper, a dynamic weakly supervised factorization is proposed to learn a classifier using NMF framework and partially supervised data. Also, a label propagation mechanism is used to initialize the label matrix factor of NMF. Besides a graph based method is used to dynamically update the partially labeled data in each iteration. This mechanism leads to enriching the supervised information in each iteration and consequently improves the classification performance.  </p>
+                    <p class="badge badge-info">Artificial Intelligence and Signal Processing Conference (AISP), 2017</p>
+
+                    <h6 class="blog-footer">
+						S. A . Seyedi |
+						P. Moradi |
+                        F. Akhlaghian Tab 
+                        
+                    </h6>
+                </div>
+            </div>
+			
+			
+			
+        </div>
+    </section>
+
+    <section id="contact" class="section pb-0">
+
+        <div class="container">
+            <h6 class="xs-font mb-0"></h6>
+            <h3 class="section-title mb-5">Contact Us</h3>
+
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-8 col-lg-7">
+
+                    <form class="contact-form">
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <input type="text" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="col form-group">
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Your Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-block" value="Send Message">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4 d-none d-md-block order-1">
+                    <ul class="list">
+                        <li class="list-head">
+                            <h6>CONTACT INFO</h6>
+                        </li>
+                        <li class="list-body">
+                            <p class="py-2">Contact us and we'll get back to you within 24 hours.</p>
+                            <p class="py-2"><i class="ti-location-pin"></i> Representation Learning Lab, Computer Engineering Department, University of Kurdistan, Sanandaj, Iran</p>
+                            
+                            
+
+                        </li>
+                    </ul> 
+                </div>
+            </div>
+
+            <footer class="footer mt-5 border-top">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-6 text-center text-md-left">
+                        
+                    </div>
+                    <!-- <div class="col-md-6 text-center text-md-right">
+                        <div class="social-links">
+                            <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
+                            <a href="javascript:void(0)" class="link"><i class="ti-twitter-alt"></i></a>
+                            <a href="javascript:void(0)" class="link"><i class="ti-google"></i></a>
+                            <a href="javascript:void(0)" class="link"><i class="ti-pinterest-alt"></i></a>
+                            <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
+                            <a href="javascript:void(0)" class="link"><i class="ti-rss"></i></a>
+                        </div>
+                    </div> -->
+                </div> 
+            </footer>
+        </div>
+    </section>
+	
+	<!-- core  -->
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+
+    <!-- bootstrap 3 affix -->
+	<script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+    
+    <!-- Owl carousel  -->
+    <script src="assets/vendors/owl-carousel/js/owl.carousel.js"></script>
+
+
+    <!-- Ollie js -->
+    <script src="assets/js/Ollie.js"></script>
+
+<!-- Statcounter -->
+<script type="text/javascript">
+var sc_project=12494759; 
+var sc_invisible=1; 
+var sc_security="06ce839b"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12494759/0/06ce839b/1/"
+alt="Web Analytics"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+</body>
+</html>
