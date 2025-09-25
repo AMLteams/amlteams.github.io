@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recommender Results – Radar Plot</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <style>
+    :root{ --bg:#0f172a; --panel:#111827; --text:#e5e7eb; --muted:#9ca3af; --accent:#60a5fa; }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background:linear-gradient(120deg,#0b1220,#0f172a 30%,#0b1220 100%); color:var(--text); }
+    header{ padding:20px 24px; display:flex; gap:12px; align-items:center; justify-content:space-between; border-bottom:1px solid #1f2937; backdrop-filter:saturate(140%) blur(6px); position:sticky; top:0; background:#0f172ad0; }
+    h1{ font-size:18px; margin:0; font-weight:700; letter-spacing:.3px; }
+    main{ max-width:1100px; margin:18px auto 56px; padding:0 18px; }
+    .card{ background:linear-gradient(180deg,#0b1220,#111827); border:1px solid #1f2937; border-radius:18px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.35); }
+    .grid{ display:grid; gap:16px; grid-template-columns: 330px 1fr; }
+    @media (max-width: 980px){ .grid{ grid-template-columns:1fr; } }
+    .controls{ display:flex; flex-direction:column; gap:16px; }
+    .control{ background:#0b1220; border:1px solid #1f2937; border-radius:14px; padding:14px; }
+    .control h3{ margin:0 0 10px; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#cbd5e1; }
+    .row{ display:grid; grid-template-columns:110px 1fr 64px; align-items:center; gap:12px; margin:8px 0; }
+    .row label{ color:#cbd5e1; font-size:13px; }
+    input[type="range"]{ width:100%; -webkit-appearance:none; height:6px; border-radius:999px; background:#1f2937; outline:none; }
+    input[type="range"]::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:18px; height:18px; border-radius:50%; background:var(--accent); border:2px solid white; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.5); }
+    input[type="range"]::-moz-range-thumb{ width:18px; height:18px; border-radius:50%; background:var(--accent); border:2px solid white; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.5); }
+    .val{ font-variant-numeric:tabular-nums; background:#0a0f1c; border:1px solid #1f2937; padding:6px 8px; border-radius:10px; font-size:12px; text-align:center; color:#d1d5db; }
+    .meta{ display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color:var(--muted); }
+    .pill{ background:#0b1220; border:1px solid #1f2937; padding:4px 10px; border-radius:999px; }
+    .status{ font-size:13px; color:#fde68a; }
+    canvas{ max-height:700px; }
+    .footer-note{ color:#94a3b8; font-size:12px; margin-top:10px; }
+    .file{ display:flex; align-items:center; gap:10px; }
+    .select{ padding:8px 10px; border-radius:10px; background:#0b1220; color:#cbd5e1; border:1px solid #1f2937; }
+    .legend{ margin-top:8px; color:#cbd5e1; font-size:12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Recommender Systems Radar • by parameters (λ<sub>p</sub>, λ<sub>d</sub>, λ<sub>f</sub>)</h1>
+    <div class="file">
+      <label class="pill" for="datasetSelect">Dataset</label>
+      <select id="datasetSelect" class="select">
+        <option value="ml100k.csv">ML100K</option>
+        <option value="ml1m.csv">ML1M</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card controls">
+      <div class="control">
+        <h3>Parameters</h3>
+        <div class="row">
+          <label for="sliderP">λ<sub>p</sub> (lambdap)</label>
+          <input id="sliderP" type="range" min="0" max="0" step="1" value="0" disabled />
+          <div class="val" id="valP">—</div>
+        </div>
+        <div class="row">
+          <label for="sliderD">λ<sub>d</sub> (lambdad)</label>
+          <input id="sliderD" type="range" min="0" max="0" step="1" value="0" disabled />
+          <div class="val" id="valD">—</div>
+        </div>
+        <div class="row">
+          <label for="sliderF">λ<sub>f</sub> (lambdaf)</label>
+          <input id="sliderF" type="range" min="0" max="0" step="1" value="0" disabled />
+          <div class="val" id="valF">—</div>
+        </div>
+        <div class="meta">
+          <span class="pill" id="countMeta">0 rows</span>
+          <span class="pill" id="metricMeta">0 metrics</span>
+          <span class="pill" id="comboMeta">Selected combo: —</span>
+        </div>
+      </div>
+      <div class="control">
+        <h3>Display</h3>
+        <div class="row">
+          <label for="normalizeToggle">Normalize (0–1)</label>
+          <input id="normalizeToggle" type="checkbox" />
+          <div class="val">Scale</div>
+        </div>
+        <div class="row">
+          <label for="fillToggle">Fill area</label>
+          <input id="fillToggle" type="checkbox" checked />
+          <div class="val">Style</div>
+        </div>
+        <p class="footer-note">Tip: Hover the chart to see exact values. Toggle normalization if your metrics use different scales.</p>
+      </div>
+      <div class="control">
+        <h3>About your CSV</h3>
+        <div class="legend">
+          Expected columns include the three parameter columns named exactly <code>lambdap</code>, <code>lambdad</code>, and <code>lambdaf</code>, plus <strong>six metric columns</strong> (any names). Additional columns will be ignored.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <canvas id="radar"></canvas>
+      <p class="status" id="status">Choose a dataset to begin.</p>
+    </section>
+  </main>
+
+  <script>
+    // --- State ---
+    let RAW = [];
+    let PARAM_VALUES = { lambdap: [], lambdad: [], lambdaf: [] };
+    let METRIC_KEYS = [];
+    let chartInstance = null;
+
+    const el = (id) => document.getElementById(id);
+    const sliders = { P: el('sliderP'), D: el('sliderD'), F: el('sliderF') };
+    const vals = { P: el('valP'), D: el('valD'), F: el('valF') };
+
+    // --- Utils ---
+    function uniqSortedNumeric(arr){
+      const u = Array.from(new Set(arr.map(Number).filter(v => !Number.isNaN(v))));
+      return u.sort((a,b)=>a-b);
+    }
+    function formatNum(n){
+      const s = Number(n);
+      if (Number.isNaN(s)) return String(n);
+      return Math.abs(s) >= 1000 ? s.toLocaleString() : s.toString();
+    }
+
+    function detectMetrics(headers){
+      const paramSet = new Set(['lambdap','lambdad','lambdaf']);
+      const metricKeys = headers.filter(h => !paramSet.has(h));
+      return metricKeys.slice(0,6);
+    }
+
+    function parseCSVRows(rows){
+      return rows.map(r => {
+        const o = {...r};
+        ['lambdap','lambdad','lambdaf'].forEach(k => { if (k in o) o[k] = parseFloat(o[k]); });
+        METRIC_KEYS.forEach(k => { if (k in o) o[k] = parseFloat(o[k]); });
+        return o;
+      });
+    }
+
+    function updateMeta(){
+      el('countMeta').textContent = `${RAW.length} rows`;
+      el('metricMeta').textContent = `${METRIC_KEYS.length} metrics`;
+    }
+
+    function setSliders(){
+      PARAM_VALUES.lambdap = uniqSortedNumeric(RAW.map(r => r.lambdap));
+      PARAM_VALUES.lambdad = uniqSortedNumeric(RAW.map(r => r.lambdad));
+      PARAM_VALUES.lambdaf = uniqSortedNumeric(RAW.map(r => r.lambdaf));
+
+      const sets = [ ['P','lambdap'], ['D','lambdad'], ['F','lambdaf'] ];
+      for (const [key, col] of sets){
+        const arr = PARAM_VALUES[col];
+        const s = sliders[key];
+        s.min = 0; s.max = Math.max(arr.length - 1, 0); s.value = 0; s.disabled = arr.length === 0;
+        vals[key].textContent = arr.length ? formatNum(arr[0]) : '—';
+      }
+      writeComboMeta();
+    }
+
+    function currentParamCombo(){
+      const lp = PARAM_VALUES.lambdap[parseInt(sliders.P.value)];
+      const ld = PARAM_VALUES.lambdad[parseInt(sliders.D.value)];
+      const lf = PARAM_VALUES.lambdaf[parseInt(sliders.F.value)];
+      return { lambdap: lp, lambdad: ld, lambdaf: lf };
+    }
+
+    function writeComboMeta(){
+      const { lambdap, lambdad, lambdaf } = currentParamCombo();
+      const txt = [lambdap, lambdad, lambdaf].every(v => v !== undefined)
+        ? `λp=${formatNum(lambdap)}, λd=${formatNum(lambdad)}, λf=${formatNum(lambdaf)}`
+        : '—';
+      el('comboMeta').textContent = `Selected combo: ${txt}`;
+    }
+
+    function findRowForCombo(combo){
+      const row = RAW.find(r => r.lambdap === combo.lambdap && r.lambdad === combo.lambdad && r.lambdaf === combo.lambdaf);
+      return row || null;
+    }
+
+    function normalize(values){
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      if (max === min) return values.map(()=>1);
+      return values.map(v => (v - min) / (max - min));
+    }
+
+    function buildDataset(row){
+      const rawVals = METRIC_KEYS.map(k => row[k]);
+      const useNorm = el('normalizeToggle').checked;
+      const data = useNorm ? normalize(rawVals) : rawVals;
+      return {
+        label: `λp=${row.lambdap}, λd=${row.lambdad}, λf=${row.lambdaf}`,
+        data,
+        fill: el('fillToggle').checked,
+        pointRadius: 3,
+        tension: 0.2,
+      };
+    }
+
+    function ensureChart(){
+      const ctx = document.getElementById('radar');
+      if (chartInstance) return chartInstance;
+      chartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: { labels: [], datasets: [] },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              angleLines: { color: '#1f2937' },
+              grid: { color: '#1f2937' },
+              pointLabels: { color: '#e5e7eb', font: { size: 12 } },
+              ticks: { color: '#9ca3af', backdropColor: 'transparent' },
+            }
+          },
+          plugins: {
+            legend: { labels: { color: '#e5e7eb' } },
+            tooltip: {
+              callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw}` }
+            }
+          },
+        }
+      });
+      return chartInstance;
+    }
+
+    function renderChart(row){
+      const chart = ensureChart();
+      chart.data.labels = METRIC_KEYS;
+      chart.data.datasets = [buildDataset(row)];
+      chart.update();
+    }
+
+    function onAnyChange(){
+      vals.P.textContent = PARAM_VALUES.lambdap[parseInt(sliders.P.value)] ?? '—';
+      vals.D.textContent = PARAM_VALUES.lambdad[parseInt(sliders.D.value)] ?? '—';
+      vals.F.textContent = PARAM_VALUES.lambdaf[parseInt(sliders.F.value)] ?? '—';
+      writeComboMeta();
+
+      const combo = currentParamCombo();
+      const row = findRowForCombo(combo);
+      if (!row){
+        el('status').textContent = 'No exact row found for this combination. Double‑check your CSV.';
+        return;
+      }
+      el('status').textContent = '';
+      renderChart(row);
+    }
+
+    sliders.P.addEventListener('input', onAnyChange);
+    sliders.D.addEventListener('input', onAnyChange);
+    sliders.F.addEventListener('input', onAnyChange);
+    el('normalizeToggle').addEventListener('change', onAnyChange);
+    el('fillToggle').addEventListener('change', onAnyChange);
+
+    // --- CSV ingest helpers (shared by file/url loaders) ---
+    function ingestParsedData(res){
+      if (!res.data || !res.data.length){
+        el('status').textContent = 'Could not read any rows from the CSV.';
+        return;
+      }
+      const headers = res.meta?.fields || Object.keys(res.data[0]);
+      METRIC_KEYS = detectMetrics(headers);
+      RAW = parseCSVRows(res.data);
+      updateMeta();
+      setSliders();
+
+      const firstRow = findRowForCombo(currentParamCombo()) || RAW[0];
+      if (firstRow){
+        const iP = PARAM_VALUES.lambdap.indexOf(firstRow.lambdap);
+        const iD = PARAM_VALUES.lambdad.indexOf(firstRow.lambdad);
+        const iF = PARAM_VALUES.lambdaf.indexOf(firstRow.lambdaf);
+        if (iP>=0) sliders.P.value = iP;
+        if (iD>=0) sliders.D.value = iD;
+        if (iF>=0) sliders.F.value = iF;
+        onAnyChange();
+      }
+    }
+
+    function loadCSVFromURL(url){
+      el('status').textContent = `Loading ${url}…`;
+      Papa.parse(url, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        dynamicTyping: false,
+        complete: (res) => {
+          el('status').textContent = '';
+          ingestParsedData(res);
+        },
+        error: (err) => {
+          console.error(err);
+          el('status').textContent = 'Error loading CSV. If opening this file directly (file://), run a local server or place CSVs next to this HTML and serve via http://localhost.';
+        }
+      });
+    }
+
+    // Dataset dropdown
+    const datasetSelect = el('datasetSelect');
+    datasetSelect.addEventListener('change', () => {
+      const csv = datasetSelect.value;
+      loadCSVFromURL(csv);
+    });
+
+    // --- Bootstrap: auto-load ML100K on start ---
+    (function bootstrap(){
+      loadCSVFromURL(datasetSelect.value); // defaults to ml100k.csv
+    })();
+  </script>
+</body>
+</html>
